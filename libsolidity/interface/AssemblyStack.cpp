@@ -73,7 +73,7 @@ bool AssemblyStack::analyzeParsed()
 	return m_analysisSuccessful;
 }
 
-eth::LinkerObject AssemblyStack::assemble(Machine _machine)
+MachineAssemblyObject AssemblyStack::assemble(Machine _machine)
 {
 	solAssert(m_analysisSuccessful, "");
 	solAssert(m_parserResult, "");
@@ -83,8 +83,11 @@ eth::LinkerObject AssemblyStack::assemble(Machine _machine)
 	{
 	case Machine::EVM:
 	{
+		MachineAssemblyObject object;
 		auto assembly = assembly::CodeGenerator(m_errorReporter).assemble(*m_parserResult, *m_analysisInfo);
-		return assembly.assemble();
+		object.binary = make_shared<eth::LinkerObject>(assembly.assemble());
+		/// TODO: fill out text representation
+		return object;
 	}
 	case Machine::EVM15:
 		solUnimplemented("EVM 1.5 backend is not yet implemented.");
@@ -92,7 +95,7 @@ eth::LinkerObject AssemblyStack::assemble(Machine _machine)
 		solUnimplemented("eWasm backend is not yet implemented.");
 	}
 	// unreachable
-	return eth::LinkerObject();
+	return MachineAssemblyObject();
 }
 
 string AssemblyStack::print()
