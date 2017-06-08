@@ -60,13 +60,13 @@ public:
 	/// @param _stackDiffAfter the stack adjustment after this instruction.
 	virtual void appendJump(int _stackDiffAfter) override;
 	/// Append a jump-to-immediate operation.
-	virtual void appendJumpTo(LabelID _label, int _stackDiffAfter) override;
+	virtual void appendJumpTo(LabelID _labelId, int _stackDiffAfter) override;
 	/// Append a jump-to-if-immediate operation.
-	virtual void appendJumpToIf(LabelID _label) override;
+	virtual void appendJumpToIf(LabelID _labelId) override;
 	/// Start a subroutine.
-	virtual void appendBeginsub(LabelID _label, int _arguments) override;
+	virtual void appendBeginsub(LabelID _labelId, int _arguments) override;
 	/// Call a subroutine.
-	virtual void appendJumpsub(LabelID _label, int _arguments, int _returns) override;
+	virtual void appendJumpsub(LabelID _labelId, int _arguments, int _returns) override;
 	/// Return from a subroutine.
 	virtual void appendReturnsub(int _returns, int _stackDiffAfter) override;
 

@@ -30,6 +30,7 @@ using namespace julia;
 
 namespace
 {
+/// Size of labels in bytes. Four-byte labels are required by some EVM1.5 instructions.
 size_t constexpr labelReferenceSize = 4;
 }
 
